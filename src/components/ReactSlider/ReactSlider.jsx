@@ -257,6 +257,7 @@ class ReactSlider extends React.Component {
          */
         // eslint-disable-next-line zillow/react/require-default-props
         renderThumb: PropTypes.func,
+        disabledIndexes: PropTypes.shape([]),
     };
 
     static defaultProps = {
@@ -278,6 +279,7 @@ class ReactSlider extends React.Component {
         invert: false,
         renderThumb: props => <div {...props} />,
         renderTrack: props => <div {...props} />,
+        disabledIndexes: [],
     };
 
     constructor(props) {
@@ -873,7 +875,9 @@ class ReactSlider extends React.Component {
             'key': `${this.props.thumbClassName}-${i}`,
             className,
             style,
-            'onMouseDown': this.createOnMouseDown(i),
+            'onMouseDown': !this.props.disabledIndexes.includes(i)
+                ? this.createOnMouseDown(i)
+                : null,
             'onTouchStart': this.createOnTouchStart(i),
             'onFocus': this.createOnKeyDown(i),
             'tabIndex': 0,

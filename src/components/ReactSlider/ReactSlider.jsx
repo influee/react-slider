@@ -257,8 +257,7 @@ class ReactSlider extends React.Component {
          */
         // eslint-disable-next-line zillow/react/require-default-props
         renderThumb: PropTypes.func,
-        disabledIndexes: PropTypes.shape([]),
-        test: PropTypes.shape([]),
+        disabledIndexes: PropTypes.arrayOf(PropTypes.number),
     };
 
     static defaultProps = {
@@ -281,7 +280,6 @@ class ReactSlider extends React.Component {
         renderThumb: props => <div {...props} />,
         renderTrack: props => <div {...props} />,
         disabledIndexes: [],
-        test: [],
     };
 
     constructor(props) {

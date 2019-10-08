@@ -869,7 +869,7 @@ ReactSlider.defaultProps = {
     return React.createElement("div", _extends({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 281
+        lineNumber: 280
       },
       __self: this
     }));
@@ -878,13 +878,12 @@ ReactSlider.defaultProps = {
     return React.createElement("div", _extends({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 282
+        lineNumber: 281
       },
       __self: this
     }));
   },
-  disabledIndexes: [],
-  test: []
+  disabledIndexes: []
 };
 ReactSlider.propTypes = process.env.NODE_ENV !== "production" ? {
   /**
@@ -1072,7 +1071,6 @@ ReactSlider.propTypes = process.env.NODE_ENV !== "production" ? {
    */
   // eslint-disable-next-line zillow/react/require-default-props
   renderThumb: PropTypes.func,
-  disabledIndexes: PropTypes.shape([]),
-  test: PropTypes.shape([])
+  disabledIndexes: PropTypes.arrayOf(PropTypes.number)
 } : {};
 export default ReactSlider;

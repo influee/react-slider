@@ -258,6 +258,8 @@ class ReactSlider extends React.Component {
         // eslint-disable-next-line zillow/react/require-default-props
         renderThumb: PropTypes.func,
         disabledIndexes: PropTypes.arrayOf(PropTypes.number),
+        minAllowed: PropTypes.number,
+        maxAllowed: PropTypes.number,
     };
 
     static defaultProps = {
@@ -280,6 +282,8 @@ class ReactSlider extends React.Component {
         renderThumb: props => <div {...props} />,
         renderTrack: props => <div {...props} />,
         disabledIndexes: [],
+        minAllowed: 0,
+        maxAllowed: 100,
     };
 
     constructor(props) {
@@ -816,11 +820,11 @@ class ReactSlider extends React.Component {
 
     trimValue(val, props = this.props) {
         let trimmed = val;
-        if (trimmed <= props.min) {
-            trimmed = props.min;
+        if (trimmed <= props.minAllowed) {
+            trimmed = props.minAllowed;
         }
-        if (trimmed >= props.max) {
-            trimmed = props.max;
+        if (trimmed >= props.maxAllowed) {
+            trimmed = props.maxAllowed;
         }
 
         return trimmed;

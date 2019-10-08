@@ -734,12 +734,12 @@ function (_React$Component) {
 
     var trimmed = val;
 
-    if (trimmed <= props.min) {
-      trimmed = props.min;
+    if (trimmed <= props.minAllowed) {
+      trimmed = props.minAllowed;
     }
 
-    if (trimmed >= props.max) {
-      trimmed = props.max;
+    if (trimmed >= props.maxAllowed) {
+      trimmed = props.maxAllowed;
     }
 
     return trimmed;
@@ -869,7 +869,7 @@ ReactSlider.defaultProps = {
     return React.createElement("div", _extends({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 280
+        lineNumber: 282
       },
       __self: this
     }));
@@ -878,12 +878,14 @@ ReactSlider.defaultProps = {
     return React.createElement("div", _extends({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 281
+        lineNumber: 283
       },
       __self: this
     }));
   },
-  disabledIndexes: []
+  disabledIndexes: [],
+  minAllowed: 0,
+  maxAllowed: 100
 };
 ReactSlider.propTypes = process.env.NODE_ENV !== "production" ? {
   /**
@@ -1071,6 +1073,8 @@ ReactSlider.propTypes = process.env.NODE_ENV !== "production" ? {
    */
   // eslint-disable-next-line zillow/react/require-default-props
   renderThumb: PropTypes.func,
-  disabledIndexes: PropTypes.arrayOf(PropTypes.number)
+  disabledIndexes: PropTypes.arrayOf(PropTypes.number),
+  minAllowed: PropTypes.number,
+  maxAllowed: PropTypes.number
 } : {};
 export default ReactSlider;

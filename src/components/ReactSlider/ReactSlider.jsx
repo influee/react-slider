@@ -707,7 +707,7 @@ class ReactSlider extends React.Component {
         const { length } = value;
         const oldValue = value[index];
 
-        const { pearling, max, min, minDistance } = this.props;
+        const { pearling, minDistance } = this.props;
 
         // if "pearling" (= thumbs pushing each other) is disabled,
         // prevent the thumb from getting closer than `minDistance` to the previous or next thumb.
@@ -735,10 +735,10 @@ class ReactSlider extends React.Component {
         if (pearling && length > 1) {
             if (newValue > oldValue) {
                 this.pushSucceeding(value, minDistance, index);
-                trimSucceeding(length, value, minDistance, max);
+                trimSucceeding(length, value, minDistance, this.props.maxAllowed);
             } else if (newValue < oldValue) {
                 this.pushPreceding(value, minDistance, index);
-                trimPreceding(length, value, minDistance, min);
+                trimPreceding(length, value, minDistance, this.props.minAllowed);
             }
         }
 

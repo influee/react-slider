@@ -640,12 +640,15 @@ function (_React$Component) {
     value[index] = newValue; // if "pearling" is enabled, let the current thumb push the pre- and succeeding thumbs.
 
     if (pearling && length > 1) {
+      var max = this.props.maxAllowed || this.props.max;
+      var min = this.props.minAllowed || this.props.min;
+
       if (newValue > oldValue) {
         this.pushSucceeding(value, minDistance, index);
-        trimSucceeding(length, value, minDistance, this.props.maxAllowed);
+        trimSucceeding(length, value, minDistance, max);
       } else if (newValue < oldValue) {
         this.pushPreceding(value, minDistance, index);
-        trimPreceding(length, value, minDistance, this.props.minAllowed);
+        trimPreceding(length, value, minDistance, min);
       }
     } // Normally you would use `shouldComponentUpdate`,
     // but since the slider is a low-level component,
@@ -731,13 +734,15 @@ function (_React$Component) {
     }
 
     var trimmed = val;
+    var max = props.maxAllowed || props.max;
+    var min = props.minAllowed || props.min;
 
-    if (trimmed <= props.minAllowed) {
-      trimmed = props.minAllowed;
+    if (trimmed <= min) {
+      trimmed = min;
     }
 
-    if (trimmed >= props.maxAllowed) {
-      trimmed = props.maxAllowed;
+    if (trimmed >= max) {
+      trimmed = max;
     }
 
     return trimmed;
@@ -882,8 +887,8 @@ ReactSlider.defaultProps = {
     }));
   },
   disabledIndexes: [],
-  minAllowed: 0,
-  maxAllowed: 100
+  minAllowed: null,
+  maxAllowed: null
 };
 ReactSlider.propTypes = process.env.NODE_ENV !== "production" ? {
   /**

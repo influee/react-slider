@@ -282,8 +282,8 @@ class ReactSlider extends React.Component {
         renderThumb: props => <div {...props} />,
         renderTrack: props => <div {...props} />,
         disabledIndexes: [],
-        minAllowed: 0,
-        maxAllowed: 100,
+        minAllowed: null,
+        maxAllowed: null,
     };
 
     constructor(props) {
@@ -733,12 +733,15 @@ class ReactSlider extends React.Component {
 
         // if "pearling" is enabled, let the current thumb push the pre- and succeeding thumbs.
         if (pearling && length > 1) {
+            const max = this.props.maxAllowed || this.props.max;
+            const min = this.props.minAllowed || this.props.min;
+
             if (newValue > oldValue) {
                 this.pushSucceeding(value, minDistance, index);
-                trimSucceeding(length, value, minDistance, this.props.maxAllowed);
+                trimSucceeding(length, value, minDistance, max);
             } else if (newValue < oldValue) {
                 this.pushPreceding(value, minDistance, index);
-                trimPreceding(length, value, minDistance, this.props.minAllowed);
+                trimPreceding(length, value, minDistance, min);
             }
         }
 
@@ -820,11 +823,15 @@ class ReactSlider extends React.Component {
 
     trimValue(val, props = this.props) {
         let trimmed = val;
-        if (trimmed <= props.minAllowed) {
-            trimmed = props.minAllowed;
+
+        const max = props.maxAllowed || props.max;
+        const min = props.minAllowed || props.min;
+
+        if (trimmed <= min) {
+            trimmed = min;
         }
-        if (trimmed >= props.maxAllowed) {
-            trimmed = props.maxAllowed;
+        if (trimmed >= max) {
+            trimmed = max;
         }
 
         return trimmed;
